@@ -1,6 +1,7 @@
 import time
 import subprocess
 from langchain_openai import ChatOpenAI
+import gc
 
 
 def get_llm():
@@ -14,15 +15,23 @@ def get_llm():
         "-ngl", "99",
     ]
 
-    subprocess.Popen(command)
+    llama_process=subprocess.Popen(command)
 
     time.sleep(10)
 
-    return ChatOpenAI(
+
+    llm = ChatOpenAI(
         base_url="http://127.0.0.1:8000/v1",
         api_key="none",
         model="gemma-4",
         temperature=0.75,
     )
 
+    return llm, llama_process
 
+
+
+def clean_up(llama_process):
+    llama_process.terminate()
+    llama_process.wait()
+    gc.collect()

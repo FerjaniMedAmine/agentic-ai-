@@ -1,10 +1,11 @@
-from llm_config import get_llm
+from llm_config import get_llm, clean_up
 from tools import all_tools
 from langchain.agents import create_agent
 
 
 
-llm=get_llm()
+
+llm,llama_process=get_llm()
 
 agent = create_agent(
     model=llm,
@@ -19,6 +20,7 @@ while True:
     user_input = input("User:")
     if user_input.lower() ==  "exit":
         print("liltek zina weld 3ami")
+        clean_up(llama_process)
         break
     
     messages.append({"role": "user", "content": user_input})
