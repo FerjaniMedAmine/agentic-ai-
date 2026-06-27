@@ -12,7 +12,18 @@ agent = create_agent(
     system_prompt="You are a helpful assistant",
 )
 
-result = agent.invoke(
-    {"messages": [{"role": "user", "content": "What's the weather in San Francisco?"}]}
-)
-print(result["messages"][-1].content)
+print("aslema kifeh najmou n3awnouk?. ekteb 'exit' bech to5rej.\n")
+messages=[]
+
+while True:
+    user_input = input("User:")
+    if user_input.lower() ==  "exit":
+        print("liltek zina weld 3ami")
+        break
+    
+    messages.append({"role": "user", "content": user_input})
+    result = agent.invoke({"messages": messages})
+
+    llm_response = result["messages"][-1].content
+    print(f"Assistant: {llm_response}")
+    messages.append({"role": "assistant", "content": llm_response})
