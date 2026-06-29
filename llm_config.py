@@ -3,6 +3,14 @@ import subprocess
 from langchain_openai import ChatOpenAI
 import gc
 
+from langchain.globals import set_llm_cache
+from langchain_community.cache import SQLiteCache
+
+
+def setup_cache():
+    set_llm_cache(SQLiteCache(database_path=".langchain_cache.db"))
+
+
 
 def get_llm():
     command = [
