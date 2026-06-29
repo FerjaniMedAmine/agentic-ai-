@@ -3,8 +3,10 @@ import subprocess
 from langchain_openai import ChatOpenAI
 import gc
 
-from langchain.globals import set_llm_cache
+
 from langchain_community.cache import SQLiteCache
+from langchain_core.globals import set_llm_cache
+
 
 
 def setup_cache():
@@ -25,7 +27,7 @@ def get_llm():
 
     llama_process=subprocess.Popen(command)
 
-    time.sleep(10)
+    time.sleep(15)
 
 
     llm = ChatOpenAI(

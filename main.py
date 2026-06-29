@@ -1,13 +1,15 @@
-from llm_config import get_llm, clean_up
+from llm_config import get_llm, clean_up, setup_cache
 from tools import all_tools
 from langchain.agents import create_agent
 
 
 
 
+setup_cache()
 llm,llama_process=get_llm()
 
 agent = create_agent(
+
     model=llm,
     tools=all_tools,
     system_prompt="You are a helpful assistant",
