@@ -1,5 +1,5 @@
-from llm_config import get_llm, clean_up, setup_cache
-from tools import all_tools
+from backend.llm_config import get_llm, clean_up, setup_cache
+from backend.tools import all_tools
 from langchain.agents import create_agent
 
 

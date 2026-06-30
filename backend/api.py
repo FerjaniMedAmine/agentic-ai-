@@ -1,10 +1,20 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 
-from llm_config import get_llm, clean_up, setup_cache
-from tools import all_tools
+from backend.llm_config import get_llm, clean_up, setup_cache
+from backend.tools import all_tools
 from langchain.agents import create_agent
 
+from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 setup_cache()
@@ -15,10 +25,7 @@ agent = create_agent(
     system_prompt="You are a helpful assistant"
 )
 
-
-app = FastAPI()
 messages =[]
-
 class ChatRequest(BaseModel):
     message:str
 
